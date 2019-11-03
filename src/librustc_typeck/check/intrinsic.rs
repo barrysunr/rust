@@ -149,6 +149,7 @@ pub fn check_intrinsic_type(tcx: TyCtxt<'_>, it: &hir::ForeignItem) {
             "rustc_peek" => (1, vec![param(0)], param(0)),
             "caller_location" => (0, vec![], tcx.caller_location_ty()),
             "panic_if_uninhabited" => (1, Vec::new(), tcx.mk_unit()),
+            "panic_if_non_zero" => (1, Vec::new(), tcx.mk_unit()),
             "init" => (1, Vec::new(), param(0)),
             "uninit" => (1, Vec::new(), param(0)),
             "forget" => (1, vec![param(0)], tcx.mk_unit()),
