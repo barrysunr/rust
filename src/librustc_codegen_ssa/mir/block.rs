@@ -546,6 +546,7 @@ impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> FunctionCx<'a, 'tcx, Bx> {
         #[derive(Debug, PartialEq)]
         enum PanicIntrinsic { IfUninhabited, IfZeroInvalid, IfAnyInvalid };
         let panic_intrinsic = intrinsic.and_then(|i| match i {
+            // FIXME: Move to symbols instead of strings.
             "panic_if_uninhabited" => Some(PanicIntrinsic::IfUninhabited),
             "panic_if_zero_invalid" => Some(PanicIntrinsic::IfZeroInvalid),
             "panic_if_any_invalid" => Some(PanicIntrinsic::IfAnyInvalid),
