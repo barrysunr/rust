@@ -576,6 +576,7 @@ impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> FunctionCx<'a, 'tcx, Bx> {
                 let location = self.get_caller_location(&mut bx, span).immediate();
 
                 // Obtain the panic entry point.
+                // FIXME: dedup this with `codegen_assert_terminator` above.
                 let def_id =
                     common::langcall(bx.tcx(), Some(span), "", lang_items::PanicFnLangItem);
                 let instance = ty::Instance::mono(bx.tcx(), def_id);
