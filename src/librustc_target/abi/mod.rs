@@ -1144,11 +1144,14 @@ impl<'a, Ty> TyLayout<'a, Ty> {
                             FieldPlacement::Array { .. } =>
                                 // FIXME(#66151): The widely use smallvec 0.6 creates uninit arrays
                                 // with any element type, so let us not (yet) complain about that.
-                                // count == 0 ||
-                                // self.field(cx, 0).to_result()?.might_permit_raw_init(cx, zero)?
+                                /* count == 0 ||
+                                self.field(cx, 0).to_result()?.might_permit_raw_init(cx, zero)? */
                                 true,
-                            FieldPlacement::Arbitrary { ref offsets, .. } => {
-                                let mut res = true;
+                            FieldPlacement::Arbitrary { .. } => {
+                                // FIXME(#66151) cargo depends on sized-chunks 0.3.0 which
+                                // has some illegal zero-initialization, so let us not (yet)
+                                // complain about aggregates either.
+                                /* let mut res = true;
                                 // Check that all fields accept zero-init.
                                 for idx in 0..offsets.len() {
                                     let field = self.field(cx, idx).to_result()?;
@@ -1157,7 +1160,8 @@ impl<'a, Ty> TyLayout<'a, Ty> {
                                         break;
                                     }
                                 }
-                                res
+                                res */
+                                true
                             }
                         }
                     }
