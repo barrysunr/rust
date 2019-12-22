@@ -1092,6 +1092,10 @@ impl<'a, Ty> TyLayout<'a, Ty> {
     /// `zero` indicates if the memory is zero-initialized, or alternatively
     /// left entirely uninitialized.
     /// This is conservative: in doubt, it will answer `true`.
+    ///
+    /// FIXME: Once we removed all the conservatism, we could alternatively
+    /// create an all-0/all-undef constant and run the vonst value validator to see if
+    /// this is a valid value for the given type.
     pub fn might_permit_raw_init<C, E>(
         self,
         cx: &C,
