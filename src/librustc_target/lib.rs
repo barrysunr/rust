@@ -12,6 +12,9 @@
 #![feature(bool_to_option)]
 #![feature(nll)]
 #![feature(slice_patterns)]
+#![feature(never_type)]
+#![feature(associated_type_bounds)]
+#![feature(exhaustive_patterns)]
 
 #[macro_use]
 extern crate log;
